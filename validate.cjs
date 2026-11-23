@@ -14,7 +14,8 @@ for (const file of pages) {
     if (url.startsWith('#')) {
       if (!ids.includes(url.slice(1))) errors.push(`${file}: missing anchor ${url}`);
     } else {
-      const [target, fragment] = url.split('#');
+      const [targetWithQuery, fragment] = url.split('#');
+      const target = targetWithQuery.split('?')[0];
       const targetPath = path.join(root,target);
       if (!fs.existsSync(targetPath)) errors.push(`${file}: missing asset ${url}`);
       else if (fragment && target.endsWith('.html')) {

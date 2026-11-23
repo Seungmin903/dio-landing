@@ -17,6 +17,8 @@ DIO 공유 다이어리 서비스 소개 사이트. 프레임워크와 빌드 �
 
 브랜치 게시에서는 루트의 공개 파일이 제공됩니다. HTML/CSS/JS의 경로는 하위 디렉터리 배포에 맞춰 상대 경로로 작성했습니다. 로컬 검증은 `node --check app.js`와 `node validate.cjs`로 수행합니다.
 
+JavaScript·CSS·공유 카드를 수정한 뒤에는 `node version-assets.cjs`를 실행해 HTML의 콘텐츠 해시를 갱신하고 검증합니다. 이전 방문자의 브라우저에 남은 파일과 새 HTML이 섞이는 일을 방지합니다.
+
 `.github/workflows/pages.yml`은 필요할 때 전환할 수 있는 선택형 커스텀 배포 워크플로입니다. 기본 push에는 실행되지 않습니다. 이를 사용할 때는 Pages Source를 GitHub Actions로 바꾼 뒤 수동 실행합니다. 이 방식은 공개 파일만 `_site`로 복사해 배포합니다.
 
 2026-11-23: 계정 billing lock으로 커스텀 Actions 작업이 시작되지 않았으나, GitHub의 기본 브랜치 게시 작업은 성공했습니다. 현재 방식의 성공이 계정 결제 제한 해제를 뜻하지는 않습니다.
