@@ -1,7 +1,5 @@
-name: Deploy DIO landing to GitHub Pages
+name: Optional custom GitHub Pages deployment
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

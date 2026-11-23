@@ -8,11 +8,18 @@ DIO 공유 다이어리 서비스 소개 사이트. 프레임워크와 빌드 �
 
 ## GitHub Pages
 
-1. GitHub 저장소 Settings → Pages → Build and deployment → Source를 **GitHub Actions**로 설정합니다.
-2. 검토한 코드를 `main`에 병합하거나 푸시합니다.
-3. Actions의 `Deploy DIO landing to GitHub Pages` 완료 후 https://seungmin903.github.io/dio-landing/ 에서 확인합니다.
+현재 **Deploy from a branch → main → / (root)** 방식으로 공개되어 있습니다.
 
-워크플로는 공개 파일만 `_site`에 복사합니다. 로컬 도구와 문서는 배포하지 않습니다. HTML/CSS/JS의 경로는 하위 디렉터리 배포에 맞춰 상대 경로로 작성했습니다.
+1. GitHub 저장소 Settings → Pages → Build and deployment → Source를 **Deploy from a branch**로 설정합니다.
+2. Branch는 `main`, 폴더는 `/ (root)`로 선택합니다.
+3. 검토한 코드를 `main`에 병합하거나 푸시합니다.
+4. Actions의 자동 `pages build and deployment` 완료 후 https://seungmin903.github.io/dio-landing/ 에서 확인합니다.
+
+브랜치 게시에서는 루트의 공개 파일이 제공됩니다. HTML/CSS/JS의 경로는 하위 디렉터리 배포에 맞춰 상대 경로로 작성했습니다. 로컬 검증은 `node --check app.js`와 `node validate.cjs`로 수행합니다.
+
+`.github/workflows/pages.yml`은 필요할 때 전환할 수 있는 선택형 커스텀 배포 워크플로입니다. 기본 push에는 실행되지 않습니다. 이를 사용할 때는 Pages Source를 GitHub Actions로 바꾼 뒤 수동 실행합니다. 이 방식은 공개 파일만 `_site`로 복사해 배포합니다.
+
+2026-11-23: 계정 billing lock으로 커스텀 Actions 작업이 시작되지 않았으나, GitHub의 기본 브랜치 게시 작업은 성공했습니다. 현재 방식의 성공이 계정 결제 제한 해제를 뜻하지는 않습니다.
 
 ## 구성과 수정
 
