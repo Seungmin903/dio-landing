@@ -8,7 +8,7 @@ for (const file of pages) {
   const html = fs.readFileSync(path.join(root,file),'utf8');
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
   if (ids.length !== new Set(ids).size) errors.push(`${file}: duplicate IDs`);
-  for (const match of html.matchAll(/\b(?:src|href|data-screenshot|data-motion-src|data-still-src)="([^"]+)"/g)) {
+  for (const match of html.matchAll(/\b(?:src|href|poster|data-screenshot|data-motion-src|data-still-src)="([^"]+)"/g)) {
     const url = match[1];
     if (/^(https?:|mailto:|data:)/.test(url)) continue;
     if (url.startsWith('#')) {

@@ -35,3 +35,11 @@
 - `node --check app.js`: 통과
 - `node validate.cjs`: HTML 8개(공유 카드 원본 포함), 내부 리소스·페이지 간 앵커 265개 검사 통과
 - `git diff --check`: 통과
+
+## 홍보영상
+
+- 사용자 제공 MP4 원본을 게시용 경로로 복사한 뒤 SHA-256 일치 확인
+- MP4 컨테이너: H.264(avc1) 영상·AAC(mp4a) 오디오, 약 62.5초, moov 메타데이터가 mdat보다 앞에 위치함
+- 자동 재생 없음, `preload="none"`, 모바일 인라인 재생, 기본 컨트롤과 별도 재생·일시정지 버튼 제공
+- `node --check app.js`: 통과
+- `node validate.cjs`: HTML 8개, 포스터와 MP4를 포함한 내부 리소스·앵커 275개 검사 통과

@@ -35,6 +35,7 @@ JavaScript·CSS·공유 카드를 수정한 뒤에는 `node version-assets.cjs`�
 - `pages.css`: 독립 페이지 머리글·현재 메뉴·페이지 간 이동 배치
 - `app.js`: 모바일 메뉴, 첫 화면 연출, 꾸미기 전후 토글, 화면 확대
 - `assets/`: 자체 호스팅 사진·폰트·DIO 캐릭터·실제 앱 화면
+- `assets/video/dio-promo.mp4`: 사용자 제공 홍보영상 원본, 홈 `#film`에서 재생(자동 재생·사전 다운로드 없음)
 - `credits.html`: 이미지 및 글꼴 출처
 - `docs/design.md`: 랜딩페이지 디자인 기준
 

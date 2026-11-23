@@ -56,6 +56,29 @@ motionButton?.addEventListener('click', () => {
 });
 reducedMotion.addEventListener('change', () => setStickerMotion(false));
 
+const promoVideo = document.querySelector('#promo-video');
+const promoToggle = document.querySelector('#promo-toggle');
+const promoStatus = document.querySelector('#promo-status');
+if (promoVideo && promoToggle && promoStatus) {
+  promoToggle.addEventListener('click', async () => {
+    if (!promoVideo.paused) { promoVideo.pause(); return; }
+    promoToggle.disabled = true;
+    promoStatus.textContent = '영상을 불러오고 있어요.';
+    try { await promoVideo.play(); }
+    catch { promoStatus.textContent = '영상을 재생하지 못했어요. 다시 누르거나 새 창에서 열어주세요.'; }
+    finally { promoToggle.disabled = false; }
+  });
+  promoVideo.addEventListener('play', () => {
+    promoToggle.textContent = '일시정지';
+    promoStatus.textContent = '';
+  });
+  promoVideo.addEventListener('pause', () => { promoToggle.textContent = '영상 재생'; });
+  promoVideo.addEventListener('ended', () => { promoToggle.textContent = '다시 재생'; });
+  promoVideo.addEventListener('error', () => {
+    promoStatus.textContent = '영상을 불러오지 못했어요. 새 창에서 열어주세요.';
+  });
+}
+
 const layerState = { pen: true, sticker: true };
 const compareButton = document.querySelector('#compare-toggle');
 const demoStatus = document.querySelector('#demo-status');
