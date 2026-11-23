@@ -37,7 +37,7 @@ function playIllustration() {
     animationTimers.push(setTimeout(() => element.classList.remove('waiting'), 500 + index * 650));
   });
 }
-document.querySelector('#hero-replay').addEventListener('click', playIllustration);
+document.querySelector('#hero-replay')?.addEventListener('click', playIllustration);
 reducedMotion.addEventListener('change', finishAnimation);
 playIllustration();
 
@@ -64,7 +64,7 @@ document.querySelectorAll('[data-toggle-layer]').forEach(button => {
     renderLayers();
   });
 });
-compareButton.addEventListener('click', () => {
+compareButton?.addEventListener('click', () => {
   const showAll = !layerState.pen && !layerState.sticker;
   layerState.pen = showAll;
   layerState.sticker = showAll;
@@ -90,15 +90,9 @@ dialog.addEventListener('click', event => {
 dialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
 document.querySelector('#year').textContent = new Date().getFullYear();
 
-if ('IntersectionObserver' in window) {
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navigation.querySelectorAll('a').forEach(link => {
-        if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    });
-  }, { rootMargin: '-15% 0px -60% 0px' });
-  document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+// Current-page navigation is rendered in each HTML file, including without JS.
+// Keep old shared links useful after splitting the original single-page site.
+if (document.body.dataset.page === 'index') {
+  const oldSections = { '#about': 'about.html', '#features': 'features.html', '#how': 'guide.html', '#story': 'brand.html', '#experience': 'features.html#experience' };
+  if (oldSections[window.location.hash]) window.location.replace(oldSections[window.location.hash]);
 }
