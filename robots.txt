@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://seungmin903.github.io/dio-landing/sitemap.xml
