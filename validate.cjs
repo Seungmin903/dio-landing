@@ -8,7 +8,7 @@ for (const file of pages) {
   const html = fs.readFileSync(path.join(root,file),'utf8');
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
   if (ids.length !== new Set(ids).size) errors.push(`${file}: duplicate IDs`);
-  for (const match of html.matchAll(/\b(?:src|href|data-screenshot)="([^"]+)"/g)) {
+  for (const match of html.matchAll(/\b(?:src|href|data-screenshot|data-motion-src|data-still-src)="([^"]+)"/g)) {
     const url = match[1];
     if (/^(https?:|mailto:|data:)/.test(url)) continue;
     if (url.startsWith('#')) {
@@ -30,7 +30,7 @@ for (const match of fs.readFileSync(path.join(root,'styles.css'),'utf8').matchAl
   if (!fs.existsSync(path.join(root,match[1]))) errors.push(`CSS: missing ${match[1]}`);
   checked++;
 }
-for (const file of ['index.html','about.html','features.html','guide.html','brand.html','credits.html','styles.css','pages.css','app.js','robots.txt','sitemap.xml','.nojekyll','assets/social-card.png']) {
+for (const file of ['index.html','about.html','features.html','guide.html','brand.html','team.html','credits.html','styles.css','pages.css','app.js','robots.txt','sitemap.xml','.nojekyll','assets/social-card.png']) {
   if (!fs.existsSync(path.join(root,file))) errors.push(`Deployment: missing ${file}`);
 }
 if (errors.length) {console.error(errors.join('\n'));process.exitCode=1;}

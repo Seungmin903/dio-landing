@@ -10,9 +10,9 @@ $purple = New-Object System.Drawing.SolidBrush ([System.Drawing.ColorTranslator]
 $font = New-Object System.Drawing.Font 'Malgun Gothic',46,([System.Drawing.FontStyle]::Bold)
 $small = New-Object System.Drawing.Font 'Malgun Gothic',17
 $wordmark = New-Object System.Drawing.Font 'Arial',30,([System.Drawing.FontStyle]::Bold)
-$graphics.DrawString('사진 한 장에서 시작되는 공유 다이어리',$small,$purple,70,96)
-$graphics.DrawString("같은 하루를,`n함께 꾸며요.",$font,$ink,65,175)
-$graphics.DrawString('나의 낙서와 너의 한마디가 모이는 곳.',$small,$ink,70,400)
+$graphics.DrawString('Decorate It Online',$small,$purple,70,96)
+$graphics.DrawString("오늘의 순간을`n나답게 기록하다",$font,$ink,65,175)
+$graphics.DrawString('내 손글씨와 스티커로 채우는 다이어리.',$small,$ink,70,400)
 $graphics.DrawString('DIO.',$wordmark,$purple,70,485)
 $mascot = [System.Drawing.Image]::FromFile((Join-Path $repoRoot 'assets/logo.png'))
 $graphics.DrawImage($mascot,760,150,340,340)

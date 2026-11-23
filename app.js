@@ -41,6 +41,21 @@ document.querySelector('#hero-replay')?.addEventListener('click', playIllustrati
 reducedMotion.addEventListener('change', finishAnimation);
 playIllustration();
 
+// The GIF starts only on request, and a still frame provides a real stop state.
+const motionImage = document.querySelector('#motion-sticker');
+const motionButton = document.querySelector('#motion-toggle');
+function setStickerMotion(playing) {
+  if (!motionImage || !motionButton) return;
+  motionImage.src = playing ? motionImage.dataset.motionSrc : motionImage.dataset.stillSrc;
+  motionButton.setAttribute('aria-pressed', String(playing));
+  motionButton.textContent = playing ? '움직임 정지' : '움직임 재생';
+  document.querySelector('#motion-status').textContent = playing ? '동적 스티커를 재생하고 있어요.' : '동적 스티커가 정지됐어요.';
+}
+motionButton?.addEventListener('click', () => {
+  setStickerMotion(motionButton.getAttribute('aria-pressed') !== 'true');
+});
+reducedMotion.addEventListener('change', () => setStickerMotion(false));
+
 const layerState = { pen: true, sticker: true };
 const compareButton = document.querySelector('#compare-toggle');
 const demoStatus = document.querySelector('#demo-status');
