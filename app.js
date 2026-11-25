@@ -14,7 +14,13 @@ menuButton.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
 });
 navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    const focusWasInMenu = navigation.contains(document.activeElement);
+    closeMenu();
+    if (focusWasInMenu) menuButton.focus();
+  }
+});
 document.addEventListener('click', event => {
   if (!event.target.closest('.header-inner')) closeMenu();
 });
@@ -105,3 +111,13 @@ if (document.body.dataset.page === 'index') {
   if (oldSections[window.location.hash]) window.location.replace(oldSections[window.location.hash]);
 }
 
+
+// Real toolbar hotspots only explain tools; they do not simulate editing.
+document.querySelectorAll('[data-tool-name]').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-tool-name]').forEach(tool => tool.setAttribute('aria-pressed', String(tool === button)));
+    document.querySelector('#tool-category').textContent = button.dataset.toolGroup;
+    document.querySelector('#tool-name').textContent = button.dataset.toolName;
+    document.querySelector('#tool-description').textContent = button.dataset.toolDescription;
+  });
+});
