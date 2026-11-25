@@ -33,3 +33,9 @@
 - 마스코트 이름·외형은 사용자 확인 기준: 노란 캐릭터는 모아, 눈사람 캐릭터는 디오. 브랜드 소개에 각각 명시하고 홈·브랜드 이미지 대체 텍스트에도 반영했다. 별도 성격·세계관은 추가하지 않았다.
 
 - Calendly(https://calendly.com/)의 제품 선택 탐색과 넓은 대표 영역을 참고해 홈·주요 기능을 재작성했다. 외부 코드·이미지·문구를 복사하지 않았다. 실제 스티커 패널 화면은 프로젝트 exec/images/14_편집_스티커.png를 사용했다. 마스코트의 개별 소개, 팀원 7명, 홍보영상은 유지했다.
+
+## 기술과 아키텍처
+- frontend/package.json: Expo SDK 58, React Native 0.88, React Native Skia.
+- backend/build.gradle 및 collaboration/config/CollaborationWebSocketConfig.java: Java 17, Spring Boot 4.1, JPA, WebSocket(별도 STOMP·Redis 표기 없음).
+- exec/1_빌드_배포_매뉴얼.md: Nginx→Spring Boot→PostgreSQL, FastAPI/SAM 2.1, S3·CloudFront, EC2·Docker Compose·GitLab CI/Runner.
+- ai/pyproject.toml 및 docs/personal-handwriting-font.md: 사진 분리는 AI 서버, DM-Font 기반 ONNX 손글씨 생성은 모바일 기기에서 처리. 서비스 주소·내부망·인증 정보는 공개 페이지에 넣지 않았다.

@@ -31,7 +31,7 @@ for (const match of fs.readFileSync(path.join(root,'styles.css'),'utf8').matchAl
   if (!fs.existsSync(path.join(root,match[1]))) errors.push(`CSS: missing ${match[1]}`);
   checked++;
 }
-for (const file of ['index.html','about.html','features.html','guide.html','brand.html','team.html','credits.html','styles.css','pages.css','flow.css','product.css','app.js','robots.txt','sitemap.xml','.nojekyll','assets/social-card.png']) {
+for (const file of ['index.html','about.html','features.html','technology.html','guide.html','brand.html','team.html','credits.html','styles.css','pages.css','flow.css','product.css','app.js','robots.txt','sitemap.xml','.nojekyll','assets/social-card.png']) {
   if (!fs.existsSync(path.join(root,file))) errors.push(`Deployment: missing ${file}`);
 }
 if (errors.length) {console.error(errors.join('\n'));process.exitCode=1;}
