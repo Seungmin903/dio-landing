@@ -112,12 +112,3 @@ if (document.body.dataset.page === 'index') {
 }
 
 
-// Real toolbar hotspots only explain tools; they do not simulate editing.
-document.querySelectorAll('[data-tool-name]').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('[data-tool-name]').forEach(tool => tool.setAttribute('aria-pressed', String(tool === button)));
-    document.querySelector('#tool-category').textContent = button.dataset.toolGroup;
-    document.querySelector('#tool-name').textContent = button.dataset.toolName;
-    document.querySelector('#tool-description').textContent = button.dataset.toolDescription;
-  });
-});
