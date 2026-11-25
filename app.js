@@ -79,36 +79,6 @@ if (promoVideo && promoToggle && promoStatus) {
   });
 }
 
-const layerState = { pen: true, sticker: true };
-const compareButton = document.querySelector('#compare-toggle');
-const demoStatus = document.querySelector('#demo-status');
-function renderLayers() {
-  document.querySelectorAll('[data-layer]').forEach(element => {
-    const visible = layerState[element.dataset.layer];
-    element.classList.toggle('is-hidden', !visible);
-    element.setAttribute('aria-hidden', String(!visible));
-  });
-  document.querySelectorAll('[data-toggle-layer]').forEach(button => {
-    button.setAttribute('aria-pressed', String(layerState[button.dataset.toggleLayer]));
-  });
-  const bare = !layerState.pen && !layerState.sticker;
-  compareButton.setAttribute('aria-pressed', String(bare));
-  compareButton.querySelector('span').textContent = bare ? '함께 꾸민 다이어리 보기' : '꾸미기 전 사진만 보기';
-  demoStatus.textContent = bare ? '꾸미기 전 사진을 보고 있어요.' : `손글씨 ${layerState.pen ? '표시' : '숨김'}, 스티커 ${layerState.sticker ? '표시' : '숨김'} 상태예요.`;
-}
-document.querySelectorAll('[data-toggle-layer]').forEach(button => {
-  button.addEventListener('click', () => {
-    layerState[button.dataset.toggleLayer] = !layerState[button.dataset.toggleLayer];
-    renderLayers();
-  });
-});
-compareButton?.addEventListener('click', () => {
-  const showAll = !layerState.pen && !layerState.sticker;
-  layerState.pen = showAll;
-  layerState.sticker = showAll;
-  renderLayers();
-});
-
 const dialog = document.querySelector('#screenshot-dialog');
 const dialogImage = document.querySelector('#screenshot-image');
 document.querySelectorAll('[data-screenshot]').forEach(button => {
@@ -133,4 +103,21 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 if (document.body.dataset.page === 'index') {
   const oldSections = { '#about': 'about.html', '#features': 'features.html', '#how': 'guide.html', '#story': 'brand.html', '#experience': 'features.html#experience' };
   if (oldSections[window.location.hash]) window.location.replace(oldSections[window.location.hash]);
+}
+
+// A product gallery, not a simulated editor. All panels remain readable without JS.
+const productButtons = [...document.querySelectorAll('[data-product]')];
+const productPanels = [...document.querySelectorAll('.product-panel')];
+if (productButtons.length) {
+  function showProduct(id) {
+    if (!productPanels.some(panel => panel.id === id)) id = productPanels[0].id;
+    productPanels.forEach(panel => { panel.hidden = panel.id !== id; });
+    productButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.product === id)));
+  }
+  showProduct(location.hash.slice(1));
+  productButtons.forEach(button => button.addEventListener('click', () => {
+    showProduct(button.dataset.product);
+    history.replaceState(null, '', '#' + button.dataset.product);
+  }));
+  window.addEventListener('hashchange', () => showProduct(location.hash.slice(1)));
 }
