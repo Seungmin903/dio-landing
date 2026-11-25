@@ -39,3 +39,5 @@
 - backend/build.gradle 및 collaboration/config/CollaborationWebSocketConfig.java: Java 17, Spring Boot 4.1, JPA, WebSocket(별도 STOMP·Redis 표기 없음).
 - exec/1_빌드_배포_매뉴얼.md: Nginx→Spring Boot→PostgreSQL, FastAPI/SAM 2.1, S3·CloudFront, EC2·Docker Compose·GitLab CI/Runner.
 - ai/pyproject.toml 및 docs/personal-handwriting-font.md: 사진 분리는 AI 서버, DM-Font 기반 ONNX 손글씨 생성은 모바일 기기에서 처리. 서비스 주소·내부망·인증 정보는 공개 페이지에 넣지 않았다.
+
+- 주요 기능을 임의 편집 예시·선택형 갤러리 대신 실제 툴바 소개로 변경. 도구 이름과 묶음은 frontend/src/editor/components/chrome/PhoneToolbar.js의 FULL_TOOLS, GUIDE_TOOL 기준. 실제 편집 화면의 툴바를 CSS로 잘라 보여주며 원본 이미지는 수정하지 않음.

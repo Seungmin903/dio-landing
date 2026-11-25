@@ -105,19 +105,3 @@ if (document.body.dataset.page === 'index') {
   if (oldSections[window.location.hash]) window.location.replace(oldSections[window.location.hash]);
 }
 
-// A product gallery, not a simulated editor. All panels remain readable without JS.
-const productButtons = [...document.querySelectorAll('[data-product]')];
-const productPanels = [...document.querySelectorAll('.product-panel')];
-if (productButtons.length) {
-  function showProduct(id) {
-    if (!productPanels.some(panel => panel.id === id)) id = productPanels[0].id;
-    productPanels.forEach(panel => { panel.hidden = panel.id !== id; });
-    productButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.product === id)));
-  }
-  showProduct(location.hash.slice(1));
-  productButtons.forEach(button => button.addEventListener('click', () => {
-    showProduct(button.dataset.product);
-    history.replaceState(null, '', '#' + button.dataset.product);
-  }));
-  window.addEventListener('hashchange', () => showProduct(location.hash.slice(1)));
-}
